@@ -1,0 +1,15 @@
+[Unit]
+Description=set amdgpu clock to save power.
+Wants=sys-module-amdgpu.device
+After=sys-module-amdgpu.device
+
+[Service]
+User=root
+Type=oneshot
+RemainAfterExit=yes
+
+ExecStart=/usr/bin/amdgpu_setclk setlow
+ExecStop=/usr/bin/amdgpu_setclk reset
+
+[Install]
+WantedBy=multi-user.target
